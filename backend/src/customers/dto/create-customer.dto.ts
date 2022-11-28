@@ -17,6 +17,11 @@ export class CreateCustomerDto {
 
   @IsString()
   @IsNotEmpty()
+  @MinLength(8)
+  readonly password: string;
+
+  @IsString()
+  @IsNotEmpty()
   @MinLength(11)
   @IsNumberString()
   readonly phone: string;

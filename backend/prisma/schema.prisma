@@ -11,6 +11,7 @@ model Customer {
   id          String    @id @db.Uuid() @default(uuid())
   fullname    String    @db.VarChar(100)
   email       String    @unique @db.VarChar(50)
+  password    String    @db.VarChar(50)
   phone       String    @unique @db.VarChar(11)
   createdAt   DateTime  @default(now())
   contacts    Contact[]
