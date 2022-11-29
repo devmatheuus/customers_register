@@ -3,6 +3,7 @@ import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { CustomerRepository } from './repositories/customer.repository';
 import { CustomerEntity } from './entities/customer.entity';
+import { SignInDto } from './dto/sign-in.dto';
 
 @Injectable()
 export class CustomersService {
@@ -29,5 +30,9 @@ export class CustomersService {
 
   public remove(id: string): Promise<CustomerEntity> {
     return this.repository.remove(id);
+  }
+
+  public signIn(signInDto: SignInDto): Promise<string> {
+    return this.repository.signIn(signInDto);
   }
 }
