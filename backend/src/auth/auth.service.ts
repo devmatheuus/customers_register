@@ -1,8 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtPayload } from './models/jwtPayload.model';
 import { CustomerEntity } from '../customers/entities/customer.entity';
 import { sign } from 'jsonwebtoken';
 import { PrismaService } from '../prisma/prisma.service';
+import { DatabaseError } from '../common/errors/types/DatabaseError';
 
 @Injectable()
 export class AuthService {
@@ -18,7 +19,8 @@ export class AuthService {
     });
 
     if (!customer) {
-      throw new NotFoundException('Customer not found.');
+      console.log('VALIDATE');
+      throw new DatabaseError('Customer not found.');
     }
 
     return customer;

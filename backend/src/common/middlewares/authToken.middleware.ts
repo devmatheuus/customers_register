@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { UnauthorizedException } from '@nestjs/common';
 import * as jwt from 'jsonwebtoken';
+import { BadRequestException } from '@nestjs/common';
 
 export const authTokenMiddleware = (
   req: Request,
@@ -9,11 +9,14 @@ export const authTokenMiddleware = (
 ) => {
   const token = req.headers.authorization?.split(' ')[1];
 
-  if (!token) throw new UnauthorizedException('Missing authorization!');
+  if (!token) {
+    console.log('SEM TOKEN');
+    throw new BadRequestException('Missing authorization!');
+  }
 
   jwt.verify(token, process.env.JWT_SECRET, (error: any, decoded: any) => {
     if (error) {
-      throw new UnauthorizedException(401, 'Invalid token');
+      throw new BadRequestException('Invalid token');
     }
 
     req.customerId = decoded.sub;

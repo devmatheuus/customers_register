@@ -4,6 +4,7 @@ import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { CustomerRepository } from './repositories/customer.repository';
 import { CustomerEntity } from './entities/customer.entity';
 import { SignInDto } from './dto/sign-in.dto';
+import { NotFoundError } from '../common/errors/types/NotFoundError';
 
 @Injectable()
 export class CustomersService {
@@ -17,8 +18,8 @@ export class CustomersService {
     return this.repository.findAll();
   }
 
-  public findOne(id: string): Promise<CustomerEntity> {
-    return this.repository.findOne(id);
+  public async findOne(id: string): Promise<CustomerEntity> {
+    return await this.repository.findOne(id);
   }
 
   public update(

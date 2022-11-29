@@ -9,8 +9,9 @@ import { CustomersController } from './customers.controller';
 import { PrismaService } from '../prisma/prisma.service';
 import { CustomerRepository } from './repositories/customer.repository';
 import { AuthService } from '../auth/auth.service';
-import { IsOwnerMiddleware } from '../common/middlewares/isOwner.middleware';
 import { authTokenMiddleware } from '../common/middlewares/authToken.middleware';
+import { isValidUUID } from '../common/middlewares/isValidUUID.middleware';
+import { isOwnerMiddleware } from '../common/middlewares/isOwner.middleware';
 
 @Module({
   exports: [PrismaService],
@@ -20,7 +21,7 @@ import { authTokenMiddleware } from '../common/middlewares/authToken.middleware'
 export class CustomersModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(authTokenMiddleware, IsOwnerMiddleware)
+      .apply(isValidUUID, authTokenMiddleware, isOwnerMiddleware)
       .exclude(
         { path: 'customers', method: RequestMethod.GET },
         { path: 'customers', method: RequestMethod.POST },

@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { CustomerEntity } from '../entities/customer.entity';
 import { CreateCustomerDto } from '../dto/create-customer.dto';
@@ -7,6 +7,7 @@ import { UpdateCustomerDto } from '../dto/update-customer.dto';
 import * as bcrypt from 'bcrypt';
 import { AuthService } from '../../auth/auth.service';
 import { SignInDto } from '../dto/sign-in.dto';
+import { BadRequestError } from '../../common/errors/types/BadRequestError';
 
 @Injectable()
 export class CustomerRepository {
@@ -95,7 +96,7 @@ export class CustomerRepository {
     });
 
     if (!customer) {
-      throw new BadRequestException('Invalid email or password.');
+      throw new BadRequestError('Invalid email or password.');
     }
 
     return customer;
@@ -108,7 +109,7 @@ export class CustomerRepository {
     const passwordMatch = await bcrypt.compare(password, customer.password);
 
     if (!passwordMatch) {
-      throw new BadRequestException('Invalid email or password.');
+      throw new BadRequestError('Invalid email or password.');
     }
 
     return passwordMatch;
