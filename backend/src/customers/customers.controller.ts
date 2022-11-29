@@ -8,14 +8,11 @@ import {
   Delete,
   HttpStatus,
   HttpCode,
-  UseGuards,
 } from '@nestjs/common';
 import { CustomersService } from './customers.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { SignInDto } from './dto/sign-in.dto';
-
-import { AuthGuard } from '@nestjs/passport';
 
 @Controller('customers')
 export class CustomersController {
@@ -39,7 +36,6 @@ export class CustomersController {
     return this.customersService.findOne(id);
   }
 
-  @UseGuards(AuthGuard('jwt'))
   @Patch(':id')
   @HttpCode(HttpStatus.OK)
   public update(
@@ -49,7 +45,6 @@ export class CustomersController {
     return this.customersService.update(id, updateCustomerDto);
   }
 
-  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   public remove(@Param('id') id: string) {
