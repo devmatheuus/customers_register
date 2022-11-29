@@ -10,7 +10,6 @@ export const authTokenMiddleware = (
   const token = req.headers.authorization?.split(' ')[1];
 
   if (!token) {
-    console.log('SEM TOKEN');
     throw new BadRequestException('Missing authorization!');
   }
 

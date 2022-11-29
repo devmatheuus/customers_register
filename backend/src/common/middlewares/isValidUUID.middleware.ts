@@ -14,11 +14,13 @@ export const isValidUUID = (
       /^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,
     );
 
-  const result = urlParamSchema.safeParse(req.params.id);
+  const { id } = req.params;
 
-  if (!result.success) {
-    throw new BadRequestException('Invalid UUID');
+  const result = urlParamSchema.safeParse(id);
+
+  if (!id || result.success) {
+    return next();
   }
 
-  next();
+  throw new BadRequestException('Invalid UUID');
 };

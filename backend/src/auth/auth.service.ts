@@ -19,7 +19,6 @@ export class AuthService {
     });
 
     if (!customer) {
-      console.log('VALIDATE');
       throw new DatabaseError('Customer not found.');
     }
 
