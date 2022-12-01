@@ -1,14 +1,14 @@
 import { Switch, Route } from 'react-router';
+
 import GlobalStyle from '../styles/global';
+import SignUpPage from 'pages/signup';
 
 const Routes = () => (
     <>
         <GlobalStyle />
         <Switch>
             <Route exact path="/">
-                <>
-                    <h1>Hello world</h1>
-                </>
+                <SignUpPage />
             </Route>
         </Switch>
     </>

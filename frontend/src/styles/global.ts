@@ -9,10 +9,12 @@ export default createGlobalStyle`
     }
 
     html{
+        height: 100%;
         font-size: 62.5%;
     }
 
     body{   
+        height: 100%;
         font-size: 1.4rem;
         font-family: 'Inter';
     
