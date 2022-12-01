@@ -59,7 +59,7 @@ const SignInPage = () => {
                             </WavyLink>
                         </span>
                     </p>
-                    <Button content="Cadastrar" Icon={BsArrowRightShort} />
+                    <Button content="Entrar" Icon={BsArrowRightShort} />
                 </form>
             </SessionContainer>
             <img className="clouds" src={seaOfClouds} alt="Cloud" />
