@@ -27,7 +27,7 @@ const SignUpContainer = styled.div`
         width: 3000px;
         height: 2000px;
         translate: 0% -50%;
-        animation: ${clouds} 45s infinite linear;
+        animation: ${clouds} 25s infinite linear;
     }
 
     .singup {
