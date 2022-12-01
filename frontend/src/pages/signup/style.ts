@@ -21,6 +21,12 @@ const SignUpContainer = styled.div`
         animation: ${clouds} 25s infinite linear;
     }
 
+    main {
+        .form {
+            gap: 10px;
+        }
+    }
+
     @media (max-width: 500px) {
         .clouds {
             display: none;
