@@ -57,7 +57,7 @@ const SignUpContainer = styled.div`
     .form {
         margin: 0;
         display: grid;
-        gap: 25px;
+        gap: 15px;
         padding: 15px 0px;
         width: 80%;
     }

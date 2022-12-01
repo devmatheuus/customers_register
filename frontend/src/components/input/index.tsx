@@ -4,25 +4,42 @@ import { IconType } from 'react-icons/lib';
 import InputContainer from './style';
 import ReactInputMask from 'react-input-mask';
 
+import { UseFormRegister } from 'react-hook-form';
+
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-    register?: any;
+    register: UseFormRegister<any>;
     Icon: IconType;
     placeholder: string;
     type: string;
     mask?: string;
+    name: string;
 }
 
-const Input = ({ Icon, placeholder, type, mask, ...rest }: InputProps) => (
+const Input = ({
+    Icon,
+    placeholder,
+    type,
+    mask,
+    register,
+    name,
+    ...rest
+}: InputProps) => (
     <InputContainer>
         {mask ? (
             <ReactInputMask
                 placeholder={placeholder}
                 type={type}
-                required
                 mask={mask}
+                required
+                {...register(name)}
             />
         ) : (
-            <input placeholder={placeholder} type={type} required />
+            <input
+                placeholder={placeholder}
+                type={type}
+                required
+                {...register(name)}
+            />
         )}
         <span className="material-symbols-outlined">
             <Icon />
