@@ -13,6 +13,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { ICreateAccountRequest } from '../../interfaces/sessions/index';
 import signupSchema from 'schemas/signup';
 import { Span } from '../../components/span/style';
+import { WavyLink } from 'react-wavy-transitions';
+import SessionContainer from 'components/sessionContainer';
 
 const SignUpPage = () => {
     const {
@@ -30,7 +32,7 @@ const SignUpPage = () => {
     return (
         <SignUpContainer className="md-box">
             <img className="clouds" src={cloud} alt="Cloud" />
-            <div className="singup">
+            <SessionContainer>
                 <form onSubmit={handleSubmit(handleForm)} className="form">
                     <h2>Registro</h2>
                     <h3>Rápido e fácil</h3>
@@ -72,11 +74,16 @@ const SignUpPage = () => {
                     {<Span>{errors.phone?.message}</Span>}
 
                     <p>
-                        Já possui uma conta? <a href="/"> Entre</a>
+                        Já possui uma conta?
+                        <span>
+                            <WavyLink to="/signin" color="#216ce7">
+                                Entre!
+                            </WavyLink>
+                        </span>
                     </p>
                     <Button content="Cadastrar" Icon={BsArrowRightShort} />
                 </form>
-            </div>
+            </SessionContainer>
         </SignUpContainer>
     );
 };

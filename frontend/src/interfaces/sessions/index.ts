@@ -4,3 +4,8 @@ export interface ICreateAccountRequest {
     password: string;
     phone: string;
 }
+
+export interface ILoginRequest {
+    email: string;
+    password: string;
+}
