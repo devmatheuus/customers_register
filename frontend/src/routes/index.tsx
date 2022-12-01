@@ -1,17 +1,20 @@
-import { Switch, Route } from 'react-router';
+import { Route, Routes } from 'react-router-dom';
 
 import GlobalStyle from '../styles/global';
 import SignUpPage from 'pages/signup';
 
-const Routes = () => (
+import { WavyContainer } from 'react-wavy-transitions';
+import SignInPage from 'pages/signin';
+
+const RoutesTeste = () => (
     <>
         <GlobalStyle />
-        <Switch>
-            <Route exact path="/">
-                <SignUpPage />
-            </Route>
-        </Switch>
+        <WavyContainer />
+        <Routes>
+            <Route path="/" element={<SignUpPage />} />
+            <Route path="/signin" element={<SignInPage />} />
+        </Routes>
     </>
 );
 
-export default Routes;
+export default RoutesTeste;
