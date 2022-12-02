@@ -4,6 +4,8 @@ import { IconType } from 'react-icons/lib';
 import NavButton from 'components/navButton';
 import SubMenuContainer from './styles';
 
+import { v4 as uuid } from 'uuid';
+
 interface Item {
     name: string;
     icon: IconType;
@@ -37,6 +39,7 @@ const SubMenu = ({ item, activeItem, handleClick }: SubMenuProps) => {
             <div ref={navRef} className="sub-nav-inner">
                 {item?.items.map((subItem) => (
                     <NavButton
+                        key={uuid()}
                         onClick={handleClick}
                         name={subItem}
                         isActive={activeItem === subItem}

@@ -9,6 +9,8 @@ import SubMenu from 'components/subMenu';
 
 import SidebarContainer from './styles';
 
+import { v4 as uuid } from 'uuid';
+
 export const Sidebar = () => {
     const [activeItem, setActiveItem] = useState('');
     const [showSidebar, setShowSidebar] = useState(false);
@@ -28,7 +30,7 @@ export const Sidebar = () => {
             </header>
             <aside className={showSidebar ? 'sidebar active' : 'sidebar'}>
                 {menuItems.map((item) => (
-                    <>
+                    <div key={uuid()}>
                         {!item.items && (
                             <NavButton
                                 onClick={handleClick}
@@ -54,7 +56,7 @@ export const Sidebar = () => {
                                 />
                             </>
                         )}
-                    </>
+                    </div>
                 ))}
             </aside>
         </SidebarContainer>
