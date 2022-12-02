@@ -18,7 +18,6 @@ const SidebarContainer = styled.div`
 
     .sidebar.active {
         left: 0;
-        transition: 850ms;
     }
 
     .sidebar-header {
