@@ -7,8 +7,13 @@ import { DatabaseInterceptor } from './common/errors/interceptors/databaseError.
 import { NotFoundInterceptor } from './common/errors/interceptors/notFoundError.interceptor';
 import { BadRequestInterceptor } from './common/errors/interceptors/badRequestError.interceptor';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const cors = require('cors');
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.use(cors());
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -23,6 +28,6 @@ async function bootstrap() {
   app.useGlobalInterceptors(new NotFoundInterceptor());
   app.useGlobalInterceptors(new DatabaseInterceptor());
   app.useGlobalInterceptors(new UnauthorizedInterceptor());
-  await app.listen(process.env.PORT || 3000);
+  await app.listen(3001);
 }
 bootstrap();
