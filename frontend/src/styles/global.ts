@@ -22,6 +22,8 @@ export default createGlobalStyle`
         button {
             cursor: pointer;
             outline: none;
+            border: 0;
+            /* padding: 0; */
         }
  
        input {
