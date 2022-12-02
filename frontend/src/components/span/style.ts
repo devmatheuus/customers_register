@@ -7,7 +7,7 @@ export const Span = styled.span`
 
     align-self: start;
 
-    gap: 2px;
+    padding: 10px 0 0 0;
 
-    transform: translateY(-25px);
+    transform: translateY(-20px);
 `;

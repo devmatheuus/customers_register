@@ -11,12 +11,15 @@ import Button from 'components/button';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ICreateAccountRequest } from '../../interfaces/sessions/index';
-import signupSchema from 'schemas/signup';
 import { Span } from '../../components/span/style';
 import { WavyLink } from 'react-wavy-transitions';
 import SessionContainer from 'components/sessionContainer';
+import { UseAuth } from 'providers/auth/index';
+import signupSchema from 'schemas/signup';
 
 const SignUpPage = () => {
+    const { signup } = UseAuth();
+
     const {
         register,
         handleSubmit,
@@ -26,7 +29,7 @@ const SignUpPage = () => {
     });
 
     const handleForm = (data: ICreateAccountRequest) => {
-        console.log(data);
+        signup(data);
     };
 
     return (
@@ -76,7 +79,11 @@ const SignUpPage = () => {
                     <p>
                         Já possui uma conta?
                         <span>
-                            <WavyLink to="/signin" color="#216ce7">
+                            <WavyLink
+                                to="/signin"
+                                color="#216ce7"
+                                direction="up"
+                            >
                                 Entre!
                             </WavyLink>
                         </span>

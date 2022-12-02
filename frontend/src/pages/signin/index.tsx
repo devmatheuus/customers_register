@@ -13,9 +13,12 @@ import { ILoginRequest } from 'interfaces/sessions/index';
 import { Span } from '../../components/span/style';
 import { WavyLink } from 'react-wavy-transitions';
 import SessionContainer from 'components/sessionContainer';
-import signinSchema from 'schemas/signup';
+import signinSchema from 'schemas/signin';
+import { UseAuth } from 'providers/auth';
 
 const SignInPage = () => {
+    const { signin } = UseAuth();
+
     const {
         register,
         handleSubmit,
@@ -25,7 +28,7 @@ const SignInPage = () => {
     });
 
     const handleForm = (data: ILoginRequest) => {
-        console.log(data);
+        signin(data);
     };
 
     return (

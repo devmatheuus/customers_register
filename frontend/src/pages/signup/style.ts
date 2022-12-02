@@ -23,7 +23,7 @@ const SignUpContainer = styled.div`
 
     main {
         .form {
-            gap: 10px;
+            gap: 5px;
         }
     }
 

@@ -5,6 +5,7 @@ import SignUpPage from 'pages/signup';
 
 import { WavyContainer } from 'react-wavy-transitions';
 import SignInPage from 'pages/signin';
+import HomePage from 'pages/home';
 
 const RoutesTeste = () => (
     <>
@@ -13,6 +14,7 @@ const RoutesTeste = () => (
         <Routes>
             <Route path="/" element={<SignUpPage />} />
             <Route path="/signin" element={<SignInPage />} />
+            <Route path="/home" element={<HomePage />} />
         </Routes>
     </>
 );

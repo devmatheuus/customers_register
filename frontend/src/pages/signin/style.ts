@@ -29,7 +29,7 @@ const SignInContainer = styled.div`
         height: 100vh;
 
         .form {
-            gap: 25px;
+            gap: 15px;
         }
     }
 
