@@ -13,8 +13,8 @@ import { ICreateContact } from '../../interfaces/contacts/index';
 import { UseAuth } from '../../providers/auth/index';
 import Modal from 'components/baseModal';
 
-const CreateUserModal = () => {
-    const { createContact } = UseHome();
+const CreateContactModal = () => {
+    const { createContact, setShowCreateContactModal } = UseHome();
     const { token } = UseAuth();
 
     const {
@@ -30,7 +30,7 @@ const CreateUserModal = () => {
     };
 
     return (
-        <Modal title="Adicionar contato">
+        <Modal title="Adicionar contato" setState={setShowCreateContactModal}>
             <form onSubmit={handleSubmit(handleForm)}>
                 <Input
                     register={register}
@@ -66,4 +66,4 @@ const CreateUserModal = () => {
     );
 };
 
-export default CreateUserModal;
+export default CreateContactModal;

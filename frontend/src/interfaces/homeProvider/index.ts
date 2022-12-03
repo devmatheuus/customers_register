@@ -5,11 +5,14 @@ export interface IHomeProvider {
     contacts: IListContacts[];
     listOwnerContacts: (token: string) => void;
 
-    showCreateUserModal: boolean;
-    setShowCreateUserModal: Dispatch<SetStateAction<boolean>>;
+    showCreateContactModal: boolean;
+    setShowCreateContactModal: Dispatch<SetStateAction<boolean>>;
 
-    showDeleteUserModal: boolean;
-    setShowDeleteUserModal: Dispatch<SetStateAction<boolean>>;
+    showDeleteContactModal: boolean;
+    setShowDeleteContactModal: Dispatch<SetStateAction<boolean>>;
+
+    setShowUpdateContactModal: Dispatch<SetStateAction<boolean>>;
+    showUpdateContactModal: boolean;
 
     currentContactId: string;
     setCurrentContactId: Dispatch<SetStateAction<string>>;

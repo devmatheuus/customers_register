@@ -3,8 +3,8 @@ import { UseAuth } from '../../providers/auth/index';
 import Modal from 'components/baseModal';
 import { ContainerButton, StyledParagraph } from './style';
 
-const DeleteUserModal = () => {
-    const { setShowDeleteUserModal, currentContactId, deleteContact } =
+const DeleteContactModal = () => {
+    const { setShowDeleteContactModal, currentContactId, deleteContact } =
         UseHome();
     const { token } = UseAuth();
 
@@ -13,7 +13,7 @@ const DeleteUserModal = () => {
     };
 
     return (
-        <Modal title="Excluir contato">
+        <Modal title="Excluir contato" setState={setShowDeleteContactModal}>
             <StyledParagraph>
                 Tem certeza que deseja excluir esse contato? Essa ação não
                 poderá ser desfeita.
@@ -25,7 +25,7 @@ const DeleteUserModal = () => {
 
                 <button
                     type="button"
-                    onClick={() => setShowDeleteUserModal(false)}
+                    onClick={() => setShowDeleteContactModal(false)}
                 >
                     Cancelar
                 </button>
@@ -34,4 +34,4 @@ const DeleteUserModal = () => {
     );
 };
 
-export default DeleteUserModal;
+export default DeleteContactModal;

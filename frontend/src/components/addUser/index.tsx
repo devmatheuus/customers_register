@@ -3,10 +3,10 @@ import { AiOutlineUserAdd } from 'react-icons/ai';
 import { UseHome } from 'providers/home';
 
 const AddUser = () => {
-    const { setShowCreateUserModal } = UseHome();
+    const { setShowCreateContactModal } = UseHome();
 
     return (
-        <StyledAddUserCircle onClick={() => setShowCreateUserModal(true)}>
+        <StyledAddUserCircle onClick={() => setShowCreateContactModal(true)}>
             <AiOutlineUserAdd size={25} />
         </StyledAddUserCircle>
     );

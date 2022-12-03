@@ -12,9 +12,9 @@ export const UseHome = () => useContext(HomeContext);
 
 export const HomeProvider = ({ children }: IPropChildren) => {
     const [contacts, setContacts] = useState(Array<IListContacts>);
-    const [showCreateUserModal, setShowCreateUserModal] = useState(false);
-    const [showDeleteUserModal, setShowDeleteUserModal] = useState(false);
-    // const [showUpdateUserModal, setShowUpdateUserModal] = useState(false);
+    const [showCreateContactModal, setShowCreateContactModal] = useState(false);
+    const [showDeleteContactModal, setShowDeleteContactModal] = useState(false);
+    const [showUpdateContactModal, setShowUpdateContactModal] = useState(false);
     const [currentContactId, setCurrentContactId] = useState('');
 
     const navigate = useNavigate();
@@ -57,7 +57,7 @@ export const HomeProvider = ({ children }: IPropChildren) => {
                 toast.error('Nome ou telefone já cadastrados');
             })
             .finally(() => {
-                setShowCreateUserModal(false);
+                setShowCreateContactModal(false);
             });
     };
 
@@ -82,7 +82,7 @@ export const HomeProvider = ({ children }: IPropChildren) => {
                 );
             })
             .finally(() => {
-                setShowDeleteUserModal(false);
+                setShowDeleteContactModal(false);
             });
     };
 
@@ -91,14 +91,16 @@ export const HomeProvider = ({ children }: IPropChildren) => {
             value={{
                 contacts,
                 listOwnerContacts,
-                setShowCreateUserModal,
-                showCreateUserModal,
+                setShowCreateContactModal,
+                showCreateContactModal,
                 createContact,
                 deleteContact,
-                setShowDeleteUserModal,
-                showDeleteUserModal,
+                setShowDeleteContactModal,
+                showDeleteContactModal,
                 currentContactId,
                 setCurrentContactId,
+                setShowUpdateContactModal,
+                showUpdateContactModal,
             }}
         >
             {children}

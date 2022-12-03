@@ -1,17 +1,15 @@
 import { AiOutlineClose } from 'react-icons/ai';
 import { ContainerModal } from './style';
 
-import { UseHome } from 'providers/home';
-import { ReactNode } from 'react';
+import { Dispatch, ReactNode, SetStateAction } from 'react';
 
 interface ModalProps {
     title: string;
     children: ReactNode;
+    setState: Dispatch<SetStateAction<boolean>>;
 }
 
-const Modal = ({ children, title }: ModalProps) => {
-    const { setShowCreateUserModal } = UseHome();
-
+const Modal = ({ children, title, setState }: ModalProps) => {
     return (
         <ContainerModal>
             <div className="modal">
@@ -21,7 +19,7 @@ const Modal = ({ children, title }: ModalProps) => {
                     <button>
                         <AiOutlineClose
                             size={20}
-                            onClick={() => setShowCreateUserModal(false)}
+                            onClick={() => setState(false)}
                         />
                     </button>
                 </div>

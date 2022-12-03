@@ -7,17 +7,18 @@ import Table from 'react-bootstrap/Table';
 import './styles.css';
 import maskPhone from '../../utils/maskPhone';
 import AddUser from '../../components/addUser/index';
-import CreateUserModal from '../../components/createUserModal/index';
-import DeleteUserModal from 'components/deleteUserModal';
+import CreateContactModal from 'components/createContactModal';
+import DeleteContactModal from 'components/deleteContactModal';
 
 const HomePage = () => {
-    const { setShowDeleteUserModal, showDeleteUserModal } = UseHome();
     const { token } = UseAuth();
     const {
         listOwnerContacts,
         contacts,
-        showCreateUserModal,
+        showCreateContactModal,
+        showDeleteContactModal,
         setCurrentContactId,
+        setShowDeleteContactModal,
         currentContactId,
     } = UseHome();
 
@@ -38,8 +39,8 @@ const HomePage = () => {
 
     return (
         <>
-            {showCreateUserModal && <CreateUserModal />}
-            {showDeleteUserModal && <DeleteUserModal />}
+            {showCreateContactModal && <CreateContactModal />}
+            {showDeleteContactModal && <DeleteContactModal />}
             <Sidebar />
 
             <h1 className="title">Informações dos contatos relacionados</h1>
@@ -71,7 +72,7 @@ const HomePage = () => {
                                     <button
                                         onClick={(event) => {
                                             handleContactId(event);
-                                            setShowDeleteUserModal(true);
+                                            setShowDeleteContactModal(true);
                                         }}
                                     >
                                         deletar{' '}
