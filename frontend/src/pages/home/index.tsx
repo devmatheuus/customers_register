@@ -3,27 +3,26 @@ import { UseHome } from '../../providers/home/index';
 import { UseAuth } from '../../providers/auth/index';
 import { useEffect } from 'react';
 
-import { BiUserCircle } from 'react-icons/bi';
-import { HiOutlineMail } from 'react-icons/hi';
-import { BsPhone } from 'react-icons/bs';
-import { FaUserEdit, FaUserSlash } from 'react-icons/fa';
-
 import Table from 'react-bootstrap/Table';
 import './styles.css';
 import maskPhone from '../../utils/maskPhone';
+import AddUser from '../../components/addUser/index';
+import CreateUserModal from '../../components/createUserModal/index';
 
 const HomePage = () => {
     const { token } = UseAuth();
-    const { listOwnerContacts, contacts } = UseHome();
+    const { listOwnerContacts, contacts, showCreateUserModal } = UseHome();
 
     useEffect(() => {
         listOwnerContacts(token);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     console.log(contacts);
 
     return (
         <>
+            {showCreateUserModal && <CreateUserModal />}
             <Sidebar />
 
             <h1 className="title">Informações dos contatos relacionados</h1>
@@ -61,6 +60,7 @@ const HomePage = () => {
                         ))}
                 </tbody>
             </Table>
+            <AddUser />
         </>
     );
 };

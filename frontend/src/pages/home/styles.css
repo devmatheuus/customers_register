@@ -1,9 +1,7 @@
-body {
-    padding: 0 10px;
-}
-
 .table {
     min-width: 500px;
+    max-width: 98%;
+    margin: 0 auto;
 }
 
 .title {

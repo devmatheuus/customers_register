@@ -27,7 +27,8 @@ export default createGlobalStyle`
         }
  
        input {
-            outline: none
+            outline: none;
+            border: none;
         }
         
         ol, li {

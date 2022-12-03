@@ -9,6 +9,7 @@ const SidebarContainer = styled.div`
     .sidebar {
         background: #111820;
         width: 260px;
+        z-index: 5;
         height: 100%;
         position: fixed;
         top: 72px;
