@@ -8,5 +8,12 @@ export interface IHomeProvider {
     showCreateUserModal: boolean;
     setShowCreateUserModal: Dispatch<SetStateAction<boolean>>;
 
+    showDeleteUserModal: boolean;
+    setShowDeleteUserModal: Dispatch<SetStateAction<boolean>>;
+
+    currentContactId: string;
+    setCurrentContactId: Dispatch<SetStateAction<string>>;
+
     createContact: (token: string, data: ICreateContact) => void;
+    deleteContact: (token: string, id: string) => void;
 }

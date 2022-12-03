@@ -8,21 +8,38 @@ import './styles.css';
 import maskPhone from '../../utils/maskPhone';
 import AddUser from '../../components/addUser/index';
 import CreateUserModal from '../../components/createUserModal/index';
+import DeleteUserModal from 'components/deleteUserModal';
 
 const HomePage = () => {
+    const { setShowDeleteUserModal, showDeleteUserModal } = UseHome();
     const { token } = UseAuth();
-    const { listOwnerContacts, contacts, showCreateUserModal } = UseHome();
+    const {
+        listOwnerContacts,
+        contacts,
+        showCreateUserModal,
+        setCurrentContactId,
+        currentContactId,
+    } = UseHome();
 
     useEffect(() => {
         listOwnerContacts(token);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    console.log(contacts);
+    console.log(currentContactId);
+
+    const handleContactId = (
+        event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
+        const contactId = event.currentTarget.parentElement!.parentElement!.id;
+
+        setCurrentContactId(contactId);
+    };
 
     return (
         <>
             {showCreateUserModal && <CreateUserModal />}
+            {showDeleteUserModal && <DeleteUserModal />}
             <Sidebar />
 
             <h1 className="title">Informações dos contatos relacionados</h1>
@@ -46,12 +63,19 @@ const HomePage = () => {
                 <tbody>
                     {contacts.length > 0 &&
                         contacts.map((contact) => (
-                            <tr>
+                            <tr id={contact.id}>
                                 <td>{contact.fullname}</td>
                                 <td>{contact.email}</td>
                                 <td>{maskPhone(contact.phone)}</td>
                                 <td>
-                                    <button>deletar </button>
+                                    <button
+                                        onClick={(event) => {
+                                            handleContactId(event);
+                                            setShowDeleteUserModal(true);
+                                        }}
+                                    >
+                                        deletar{' '}
+                                    </button>
                                 </td>
                                 <td>
                                     <button> editar</button>

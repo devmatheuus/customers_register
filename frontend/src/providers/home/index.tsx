@@ -13,6 +13,9 @@ export const UseHome = () => useContext(HomeContext);
 export const HomeProvider = ({ children }: IPropChildren) => {
     const [contacts, setContacts] = useState(Array<IListContacts>);
     const [showCreateUserModal, setShowCreateUserModal] = useState(false);
+    const [showDeleteUserModal, setShowDeleteUserModal] = useState(false);
+    // const [showUpdateUserModal, setShowUpdateUserModal] = useState(false);
+    const [currentContactId, setCurrentContactId] = useState('');
 
     const navigate = useNavigate();
 
@@ -58,6 +61,31 @@ export const HomeProvider = ({ children }: IPropChildren) => {
             });
     };
 
+    const deleteContact = (token: string, id: string) => {
+        toast.loading('Excluindo...');
+
+        api.delete(`/contacts/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+            .then(() => {
+                toast.dismiss();
+                toast.success('Contato excluído com sucesso');
+
+                listOwnerContacts(token);
+            })
+            .catch(() => {
+                toast.dismiss();
+                toast.error(
+                    'Houve um erro, tente novamente em alguns instantes'
+                );
+            })
+            .finally(() => {
+                setShowDeleteUserModal(false);
+            });
+    };
+
     return (
         <HomeContext.Provider
             value={{
@@ -66,6 +94,11 @@ export const HomeProvider = ({ children }: IPropChildren) => {
                 setShowCreateUserModal,
                 showCreateUserModal,
                 createContact,
+                deleteContact,
+                setShowDeleteUserModal,
+                showDeleteUserModal,
+                currentContactId,
+                setCurrentContactId,
             }}
         >
             {children}
