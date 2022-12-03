@@ -5,6 +5,8 @@ import App from './App';
 import { WavyContainer } from 'react-wavy-transitions';
 import Providers from 'providers';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );

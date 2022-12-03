@@ -17,7 +17,7 @@ export default createGlobalStyle`
         height: 100%;
         font-size: 1.4rem;
         font-family: 'Inter';
-    
+        background: #111820;
 
         button {
             cursor: pointer;

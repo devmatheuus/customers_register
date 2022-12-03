@@ -11,9 +11,10 @@ const SidebarContainer = styled.div`
         width: 260px;
         height: 100%;
         position: fixed;
-        top: 70px;
-        left: -100%;
+        top: 72px;
+        left: -200%;
         transition: 850ms;
+        border-right: 1px solid #3284ce;
     }
 
     .sidebar.active {

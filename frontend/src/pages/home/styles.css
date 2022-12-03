@@ -1,0 +1,33 @@
+body {
+    padding: 0 10px;
+}
+
+.table {
+    min-width: 500px;
+}
+
+.title {
+    text-align: center;
+    padding: 15px;
+    font-size: 2.9rem;
+    font-weight: 800;
+
+    color: #f9f9f9;
+}
+
+tr {
+    height: 45px;
+    vertical-align: middle;
+}
+
+thead tr {
+    font-weight: 800;
+    color: #3284ce;
+    text-align: center;
+}
+
+button {
+    background: transparent;
+    color: #3284ce;
+    font-weight: 800;
+}
