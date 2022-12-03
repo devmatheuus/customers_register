@@ -11,7 +11,7 @@ import { UseHome } from 'providers/home';
 import { Span } from 'components/span/style';
 import { ICreateContact } from '../../interfaces/contacts/index';
 import { UseAuth } from '../../providers/auth/index';
-import Modal from 'components/modal';
+import Modal from 'components/baseModal';
 
 const CreateUserModal = () => {
     const { createContact } = UseHome();
