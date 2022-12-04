@@ -4,7 +4,11 @@ import { toast } from 'react-toastify';
 import api from 'services/api';
 import { IHomeProvider } from 'interfaces/homeProvider/index';
 import { useNavigate } from 'react-router-dom';
-import { ICreateContact, IListContacts } from '../../interfaces/contacts/index';
+import {
+    ICreateContact,
+    IListContacts,
+    IUpdateContact,
+} from '../../interfaces/contacts/index';
 
 const HomeContext = createContext<IHomeProvider>({} as IHomeProvider);
 
@@ -20,8 +24,6 @@ export const HomeProvider = ({ children }: IPropChildren) => {
     const navigate = useNavigate();
 
     const listOwnerContacts = (token: string) => {
-        toast.loading('Carregando...');
-
         api.get('/contacts', {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -29,13 +31,17 @@ export const HomeProvider = ({ children }: IPropChildren) => {
         })
             .then((response) => {
                 setContacts(response.data);
-                toast.dismiss();
             })
             .catch(() => {
                 localStorage.clear();
+
                 toast.error('Erro ao carregar tarefas, faça login novamente');
-                toast.dismiss();
                 navigate('/signin');
+            })
+            .finally(() => {
+                setTimeout(() => {
+                    toast.dismiss();
+                }, 2500);
             });
     };
 
@@ -48,16 +54,18 @@ export const HomeProvider = ({ children }: IPropChildren) => {
             },
         })
             .then((response) => {
-                toast.dismiss();
                 toast.success('Contato adicionado com sucesso');
                 setContacts([...contacts, response.data]);
             })
             .catch(() => {
-                toast.dismiss();
                 toast.error('Nome ou telefone já cadastrados');
             })
             .finally(() => {
                 setShowCreateContactModal(false);
+
+                setTimeout(() => {
+                    toast.dismiss();
+                }, 1500);
             });
     };
 
@@ -70,19 +78,46 @@ export const HomeProvider = ({ children }: IPropChildren) => {
             },
         })
             .then(() => {
-                toast.dismiss();
                 toast.success('Contato excluído com sucesso');
 
                 listOwnerContacts(token);
             })
             .catch(() => {
-                toast.dismiss();
                 toast.error(
                     'Houve um erro, tente novamente em alguns instantes'
                 );
             })
             .finally(() => {
                 setShowDeleteContactModal(false);
+
+                setTimeout(() => {
+                    toast.dismiss();
+                }, 2500);
+            });
+    };
+
+    const updateContact = (token: string, data: IUpdateContact) => {
+        toast.loading('Atualizando...');
+
+        api.post('/contacts', data, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+            .then((response) => {
+                toast.success('Contato atualizado com sucesso');
+
+                listOwnerContacts(token);
+            })
+            .catch(() => {
+                toast.error('Nome ou telefone já cadastrados');
+            })
+            .finally(() => {
+                setShowUpdateContactModal(false);
+
+                setTimeout(() => {
+                    toast.dismiss();
+                }, 2500);
             });
     };
 
@@ -101,6 +136,7 @@ export const HomeProvider = ({ children }: IPropChildren) => {
                 setCurrentContactId,
                 setShowUpdateContactModal,
                 showUpdateContactModal,
+                updateContact,
             }}
         >
             {children}

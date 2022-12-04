@@ -1,27 +1,52 @@
 import { z } from 'zod';
 
+const validateEmail = z.string().email();
+
 const updateUserSchema = z.object({
     fullname: z
         .string()
-        .min(2, 'O campo deve conter mais de 2 caracteres')
-        .max(100, 'O campo não pode conter mais de cem caracteres')
-        .optional(),
+        .optional()
+        .refine((fullname) => {
+            if (fullname) {
+                return fullname.length > 2 && fullname.length < 100;
+            } else {
+                return true;
+            }
+        }, 'O nome deve conter mais de 2 caracteres e menos de 100'),
     email: z
         .string()
-        .email('Insira um email válido')
-        .max(50, 'O campo não pode conter mais de cinquenta caracteres')
-        .optional(),
+        .optional()
+        .refine((email) => {
+            if (email) {
+                console.log('oi');
+                const isEmail = validateEmail.safeParse(email);
+
+                return email.length < 50 && isEmail.success;
+            } else {
+                console.log('ai');
+
+                return true;
+            }
+        }, 'Insira um email válido com menos de com menos de 50 caracteres.'),
     phone: z
         .string()
-        .min(11, 'Insira um número de telefone válido')
-        .max(15, 'Insira um número de telefone válido')
+        .optional()
         .refine((phone) => {
-            phone = phone.replace(/_/g, '');
+            if (phone) {
+                phone = phone.replace(/_/g, '');
+                let phoneValidate = phone.length >= 11 && phone.length <= 15;
 
-            return phone.length >= 15;
-        }, 'Insira um número de telefone válido')
-        .transform((phone) => phone.replace(/[^0-9]/g, ''))
-        .optional(),
+                if (!phoneValidate) {
+                    return false;
+                }
+
+                phone = phone.replace(/[^0-9]/g, '');
+
+                return phone.length === 11 ? true : false;
+            } else {
+                return true;
+            }
+        }, 'Insira um número de telefone válido'),
 });
 
 export default updateUserSchema;

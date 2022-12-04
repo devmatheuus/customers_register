@@ -4,6 +4,12 @@ export interface ICreateContact {
     phone: string;
 }
 
+export interface IUpdateContact {
+    fullname?: string;
+    email?: string;
+    phone?: string;
+}
+
 export interface IListContacts {
     id: string;
     fullname: string;

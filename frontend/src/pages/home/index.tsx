@@ -9,6 +9,7 @@ import maskPhone from '../../utils/maskPhone';
 import AddUser from '../../components/addUser/index';
 import CreateContactModal from 'components/createContactModal';
 import DeleteContactModal from 'components/deleteContactModal';
+import UpdateContactModal from 'components/updateContactModal';
 
 const HomePage = () => {
     const { token } = UseAuth();
@@ -20,6 +21,8 @@ const HomePage = () => {
         setCurrentContactId,
         setShowDeleteContactModal,
         currentContactId,
+        showUpdateContactModal,
+        setShowUpdateContactModal,
     } = UseHome();
 
     useEffect(() => {
@@ -41,6 +44,7 @@ const HomePage = () => {
         <>
             {showCreateContactModal && <CreateContactModal />}
             {showDeleteContactModal && <DeleteContactModal />}
+            {showUpdateContactModal && <UpdateContactModal />}
             <Sidebar />
 
             <h1 className="title">Informações dos contatos relacionados</h1>
@@ -79,7 +83,15 @@ const HomePage = () => {
                                     </button>
                                 </td>
                                 <td>
-                                    <button> editar</button>
+                                    <button
+                                        onClick={(event) => {
+                                            handleContactId(event);
+                                            setShowUpdateContactModal(true);
+                                        }}
+                                    >
+                                        {' '}
+                                        editar
+                                    </button>
                                 </td>
                             </tr>
                         ))}

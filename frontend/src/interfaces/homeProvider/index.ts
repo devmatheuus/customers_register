@@ -1,5 +1,9 @@
 import { Dispatch, SetStateAction } from 'react';
-import { ICreateContact, IListContacts } from '../contacts/index';
+import {
+    ICreateContact,
+    IListContacts,
+    IUpdateContact,
+} from '../contacts/index';
 
 export interface IHomeProvider {
     contacts: IListContacts[];
@@ -19,4 +23,5 @@ export interface IHomeProvider {
 
     createContact: (token: string, data: ICreateContact) => void;
     deleteContact: (token: string, id: string) => void;
+    updateContact: (token: string, data: IUpdateContact) => void;
 }

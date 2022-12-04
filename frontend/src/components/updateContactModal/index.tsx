@@ -5,32 +5,32 @@ import { BiUserCircle } from 'react-icons/bi';
 import { HiOutlineMail } from 'react-icons/hi';
 import { BsPhone } from 'react-icons/bs';
 import Button from 'components/button';
-import addUserSchema from 'schemas/addUser';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { UseHome } from 'providers/home';
 import { Span } from 'components/span/style';
-import { ICreateContact } from '../../interfaces/contacts/index';
+import { IUpdateContact } from '../../interfaces/contacts/index';
 import { UseAuth } from '../../providers/auth/index';
 import Modal from 'components/baseModal';
+import updateUserSchema from '../../schemas/updateUser/index';
 
-const CreateUserModal = () => {
-    const { createContact, setShowUpdateContactModal } = UseHome();
+const UpdateContactModal = () => {
+    const { setShowUpdateContactModal } = UseHome();
     const { token } = UseAuth();
 
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<ICreateContact>({
-        resolver: zodResolver(addUserSchema),
+    } = useForm<IUpdateContact>({
+        resolver: zodResolver(updateUserSchema),
     });
 
-    const handleForm = (data: ICreateContact) => {
-        createContact(token, data);
+    const handleForm = (data: IUpdateContact) => {
+        // createContact(token, data);
     };
 
     return (
-        <Modal title="Adicionar contato" setState={setShowUpdateContactModal}>
+        <Modal title="Atualizar contato" setState={setShowUpdateContactModal}>
             <form onSubmit={handleSubmit(handleForm)}>
                 <Input
                     register={register}
@@ -60,10 +60,10 @@ const CreateUserModal = () => {
                 />
                 <Span>{errors.phone?.message}</Span>
 
-                <Button content="Adicionar" />
+                <Button content="Atualizar" />
             </form>
         </Modal>
     );
 };
 
-export default CreateUserModal;
+export default UpdateContactModal;
