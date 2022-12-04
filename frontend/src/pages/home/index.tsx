@@ -1,7 +1,7 @@
 import { Sidebar } from '../../components/sidebar/index';
 import { UseHome } from '../../providers/home/index';
 import { UseAuth } from '../../providers/auth/index';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import Table from 'react-bootstrap/Table';
 import './styles.css';
@@ -20,7 +20,6 @@ const HomePage = () => {
         showDeleteContactModal,
         setCurrentContactId,
         setShowDeleteContactModal,
-        currentContactId,
         showUpdateContactModal,
         setShowUpdateContactModal,
     } = UseHome();
@@ -30,14 +29,14 @@ const HomePage = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    console.log(currentContactId);
-
     const handleContactId = (
         event: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
         const contactId = event.currentTarget.parentElement!.parentElement!.id;
 
         setCurrentContactId(contactId);
+
+        return;
     };
 
     return (

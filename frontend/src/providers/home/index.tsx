@@ -20,6 +20,8 @@ export const HomeProvider = ({ children }: IPropChildren) => {
     const [showDeleteContactModal, setShowDeleteContactModal] = useState(false);
     const [showUpdateContactModal, setShowUpdateContactModal] = useState(false);
     const [currentContactId, setCurrentContactId] = useState('');
+    const [defaultContactDatas, setDefaultContactDatas] =
+        useState<IListContacts>({} as IListContacts);
 
     const navigate = useNavigate();
 
@@ -96,10 +98,14 @@ export const HomeProvider = ({ children }: IPropChildren) => {
             });
     };
 
-    const updateContact = (token: string, data: IUpdateContact) => {
+    const updateContact = (
+        token: string,
+        data: IUpdateContact,
+        contactId: string
+    ) => {
         toast.loading('Atualizando...');
 
-        api.post('/contacts', data, {
+        api.patch(`/contacts/${contactId}`, data, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -121,6 +127,14 @@ export const HomeProvider = ({ children }: IPropChildren) => {
             });
     };
 
+    const listOneContact = (token: string, contactId: string) => {
+        api.get(`/contacts/${contactId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }).then((res) => setDefaultContactDatas(res.data));
+    };
+
     return (
         <HomeContext.Provider
             value={{
@@ -137,6 +151,8 @@ export const HomeProvider = ({ children }: IPropChildren) => {
                 setShowUpdateContactModal,
                 showUpdateContactModal,
                 updateContact,
+                listOneContact,
+                defaultContactDatas,
             }}
         >
             {children}

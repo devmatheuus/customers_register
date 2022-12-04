@@ -21,7 +21,14 @@ export interface IHomeProvider {
     currentContactId: string;
     setCurrentContactId: Dispatch<SetStateAction<string>>;
 
+    defaultContactDatas: IListContacts;
+
     createContact: (token: string, data: ICreateContact) => void;
     deleteContact: (token: string, id: string) => void;
-    updateContact: (token: string, data: IUpdateContact) => void;
+    updateContact: (
+        token: string,
+        data: IUpdateContact,
+        contactId: string
+    ) => void;
+    listOneContact: (token: string, contactId: string) => void;
 }

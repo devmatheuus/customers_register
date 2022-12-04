@@ -12,10 +12,24 @@ import { IUpdateContact } from '../../interfaces/contacts/index';
 import { UseAuth } from '../../providers/auth/index';
 import Modal from 'components/baseModal';
 import updateUserSchema from '../../schemas/updateUser/index';
+import maskPhone from 'utils/maskPhone';
 
 const UpdateContactModal = () => {
-    const { setShowUpdateContactModal } = UseHome();
+    const {
+        setShowUpdateContactModal,
+        currentContactId,
+        updateContact,
+        listOneContact,
+        defaultContactDatas,
+    } = UseHome();
+
     const { token } = UseAuth();
+
+    const getDefaultContactData = (contactId: string) => {
+        listOneContact(token, contactId);
+
+        return defaultContactDatas;
+    };
 
     const {
         register,
@@ -26,8 +40,28 @@ const UpdateContactModal = () => {
     });
 
     const handleForm = (data: IUpdateContact) => {
-        // createContact(token, data);
+        const formateData = Object.fromEntries(
+            Object.entries(data).filter(([o, v]) => v !== '')
+        );
+
+        if (formateData.phone) {
+            formateData.phone = phone.replace(/[^0-9]/g, '');
+        }
+
+        updateContact(token, formateData, currentContactId);
     };
+
+    const returnDefaultContactValues = () => {
+        const defaultData = getDefaultContactData(currentContactId);
+
+        const { email, fullname, phone } = defaultData;
+
+        const contactData = { email, fullname, phone };
+
+        return contactData;
+    };
+
+    const { email, fullname, phone } = returnDefaultContactValues();
 
     return (
         <Modal title="Atualizar contato" setState={setShowUpdateContactModal}>
@@ -35,7 +69,7 @@ const UpdateContactModal = () => {
                 <Input
                     register={register}
                     Icon={BiUserCircle}
-                    placeholder="Nome completo"
+                    placeholder={fullname}
                     name="fullname"
                     type="text"
                 />
@@ -44,7 +78,7 @@ const UpdateContactModal = () => {
                 <Input
                     register={register}
                     Icon={HiOutlineMail}
-                    placeholder="Email"
+                    placeholder={email}
                     name="email"
                     type="text"
                 />
@@ -53,7 +87,7 @@ const UpdateContactModal = () => {
                 <Input
                     register={register}
                     Icon={BsPhone}
-                    placeholder="Número de telefone"
+                    placeholder={phone && maskPhone(phone)}
                     name="phone"
                     type="text"
                     mask="(99) 99999-9999"
