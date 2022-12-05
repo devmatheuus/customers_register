@@ -33,11 +33,6 @@ export const AccountProvider = ({ children }: IPropChildren) => {
 
                 toast.error('Erro ao carregar tarefas, faça login novamente');
                 navigate('/signin');
-            })
-            .finally(() => {
-                setTimeout(() => {
-                    toast.dismiss();
-                }, 2500);
             });
     };
 

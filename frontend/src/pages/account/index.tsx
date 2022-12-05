@@ -29,6 +29,8 @@ import { mask, unMask } from 'remask';
 
 import updateUserSchema from 'schemas/updateUser/index';
 import { IUpdateContact } from 'interfaces/contacts/index';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 interface ITokenPayload {
     customerId: string;
@@ -38,12 +40,22 @@ interface ITokenPayload {
 }
 
 const AccountPage = () => {
-    const { token } = UseAuth();
+    const { token, authenticated } = UseAuth();
+    const navigate = useNavigate();
+
     const { accountData, listAccount, updateUser } = UseAccount();
 
-    const tokenPayload: ITokenPayload = jwt_decode(token);
+    let tokenPayload: ITokenPayload;
+    if (token) {
+        tokenPayload = jwt_decode(token);
+    }
 
     useEffect(() => {
+        if (!authenticated) {
+            toast.info('Faça login novamente');
+            return navigate('/signin');
+        }
+
         listAccount(token, tokenPayload.customerId);
     }, []);
 
