@@ -1,25 +1,16 @@
 import { createContext, useContext, useState } from 'react';
+
 import { useNavigate } from 'react-router-dom';
+
 import { toast } from 'react-toastify';
+
+import { IUpdateContact } from 'interfaces/contacts/index';
+import IPropChildren from 'interfaces/childrenInterface';
+
 import api from 'services/api';
-import IPropChildren from '../../interfaces/childrenInterface';
-import { IListContacts, IUpdateContact } from '../../interfaces/contacts/index';
 
-interface IListAccount {
-    id: string;
-    fullname: string;
-    email: string;
-    password: string;
-    phone: string;
-    createdAt: string;
-    contacts: IListContacts[];
-}
-
-interface IAccountProvider {
-    accountData: IListAccount;
-    listAccount: (token: string, id: string) => void;
-    updateUser: (token: string, data: IUpdateContact, id: string) => void;
-}
+import { IListAccount } from 'interfaces/account';
+import { IAccountProvider } from 'interfaces/accountProvider';
 
 const AccountContext = createContext<IAccountProvider>({} as IAccountProvider);
 
@@ -51,10 +42,6 @@ export const AccountProvider = ({ children }: IPropChildren) => {
     };
 
     const updateUser = (token: string, data: IUpdateContact, id: string) => {
-        console.log('Provider');
-        console.log(data);
-        console.log('Provider');
-
         toast.loading('Atualizando...');
 
         api.patch(`/customers/${id}`, data, {
@@ -62,7 +49,7 @@ export const AccountProvider = ({ children }: IPropChildren) => {
                 Authorization: `Bearer ${token}`,
             },
         })
-            .then((response) => {
+            .then(() => {
                 toast.success('Dados atualizados com sucesso');
             })
             .catch(() => {

@@ -1,18 +1,22 @@
 import Input from '../input/index';
+import updateUserSchema from 'schemas/updateUser/index';
+import maskPhone from 'utils/maskPhone';
+
 import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import { BiUserCircle } from 'react-icons/bi';
 import { HiOutlineMail } from 'react-icons/hi';
 import { BsPhone } from 'react-icons/bs';
+
 import Button from 'components/button';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { UseHome } from 'providers/home';
 import { Span } from 'components/span/style';
-import { IUpdateContact } from '../../interfaces/contacts/index';
-import { UseAuth } from '../../providers/auth/index';
 import Modal from 'components/baseModal';
-import updateUserSchema from '../../schemas/updateUser/index';
-import maskPhone from 'utils/maskPhone';
+
+import { UseHome } from 'providers/home';
+import { UseAuth } from 'providers/auth/index';
+
+import { IUpdateContact } from 'interfaces/contacts/index';
 
 const UpdateContactModal = () => {
     const {

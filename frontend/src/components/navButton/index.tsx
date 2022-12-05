@@ -1,4 +1,3 @@
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { IconType } from 'react-icons/lib';
 
 import Icon from 'components/Icon';
@@ -25,7 +24,6 @@ const NavButton = ({
     >
         {icon && <Icon Icon={icon} />}
         <span>{name}</span>
-        {hasSubNav && <Icon Icon={isActive ? IoIosArrowDown : IoIosArrowUp} />}
     </button>
 );
 

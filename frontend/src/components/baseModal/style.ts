@@ -90,6 +90,7 @@ export const ContainerModal = styled.div`
 
         div {
             width: 100%;
+
             input {
                 width: 100%;
             }

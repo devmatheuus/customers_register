@@ -3,18 +3,22 @@ import styled from 'styled-components';
 const SidebarContainer = styled.div`
     button {
         background: transparent;
+
         text-align: left;
     }
 
     .sidebar {
         background: #111820;
+
         width: 260px;
         z-index: 5;
         height: 100%;
-        position: fixed;
-        top: 72px;
         left: -200%;
+        top: 72px;
+
+        position: fixed;
         transition: 850ms;
+
         border-right: 1px solid #3284ce;
     }
 
@@ -25,10 +29,13 @@ const SidebarContainer = styled.div`
     .sidebar-header {
         display: flex;
         align-items: center;
+
         height: 72px;
         width: 100%;
-        background: #111820;
         padding: 0 1.25rem 0 25;
+
+        background: #111820;
+
         border-bottom: 1px solid #3284ce;
     }
 
@@ -42,15 +49,18 @@ const SidebarContainer = styled.div`
     .sidebar button {
         position: relative;
         display: flex;
-        gap: 16px;
         align-items: center;
+
+        gap: 16px;
         height: 50px;
         width: 100%;
+        padding: 0 25px;
+
         font-family: inherit;
         font-size: 16px;
         font-weight: 400;
         line-height: 1;
-        padding: 0 25px;
+
         color: #f9f9f9;
     }
 

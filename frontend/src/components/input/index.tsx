@@ -1,11 +1,9 @@
 import { InputHTMLAttributes } from 'react';
+import { UseFormRegister } from 'react-hook-form';
 import { IconType } from 'react-icons/lib';
 
-import InputContainer from './style';
 import ReactInputMask from 'react-input-mask';
-
-import { UseFormRegister, FieldErrorsImpl } from 'react-hook-form';
-import { ILoginRequest } from '../../interfaces/sessions/index';
+import InputContainer from './style';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     register: UseFormRegister<any>;
@@ -14,7 +12,6 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     type: string;
     mask?: string;
     name: string;
-    // errors: Partial<FieldErrorsImpl<ILoginRequest>>;
 }
 
 const Input = ({
@@ -32,16 +29,10 @@ const Input = ({
                 placeholder={placeholder}
                 type={type}
                 mask={mask}
-                // required
                 {...register(name)}
             />
         ) : (
-            <input
-                placeholder={placeholder}
-                type={type}
-                // required
-                {...register(name)}
-            />
+            <input placeholder={placeholder} type={type} {...register(name)} />
         )}
         <span className="material-symbols-outlined">
             <Icon />

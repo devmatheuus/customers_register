@@ -6,15 +6,17 @@ import { BsKey, BsArrowRightShort } from 'react-icons/bs';
 
 import Input from 'components/input';
 import Button from 'components/button';
+import { Span } from 'components/span/style';
+import SessionContainer from 'components/sessionContainer';
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ILoginRequest } from 'interfaces/sessions/index';
-import { Span } from '../../components/span/style';
+
 import { WavyLink } from 'react-wavy-transitions';
-import SessionContainer from 'components/sessionContainer';
-import signinSchema from 'schemas/signin';
+
+import { ILoginRequest } from 'interfaces/sessions/index';
 import { UseAuth } from 'providers/auth';
+import signinSchema from 'schemas/signin';
 
 const SignInPage = () => {
     const { signin } = UseAuth();

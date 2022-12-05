@@ -8,7 +8,7 @@ const menuItems = [
     {
         name: 'Conta',
         icon: MdLockOutline,
-        items: ['Alterar Senha', 'Alterar Email', 'Alterar Nome'],
+        items: [],
     },
     { name: 'Gerar PDF', icon: AiOutlineFilePdf },
     { name: 'Sair', icon: BiLogOut },

@@ -2,11 +2,11 @@ import styled from 'styled-components';
 
 export const AccountContainer = styled.div`
     margin: 0 auto;
-
     width: 100%;
     max-width: 500px;
     height: 500px;
     padding: 15px;
+
     display: flex;
     justify-content: start;
     align-items: center;
@@ -14,6 +14,7 @@ export const AccountContainer = styled.div`
 
     h3 {
         text-align: center;
+
         color: #f9f9f9;
     }
 
@@ -26,7 +27,6 @@ export const AccountContainer = styled.div`
         justify-content: center;
         flex-direction: column;
         align-items: center;
-        border-bottom: 1px solid #3284ce;
 
         > div {
             width: 100%;
@@ -37,6 +37,7 @@ export const AccountContainer = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
+
         gap: 15px;
         width: 100%;
 
@@ -50,9 +51,10 @@ export const AccountContainer = styled.div`
         button {
             width: 100%;
             padding: 5px 0px;
-            display: flex;
 
+            display: flex;
             justify-content: center;
+
             font-size: 2rem;
         }
     }

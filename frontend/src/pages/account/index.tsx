@@ -1,31 +1,34 @@
-import { Sidebar } from '../../components/sidebar/index';
-import { AccountContainer } from './styles';
-import { useForm } from 'react-hook-form';
+import { Sidebar } from 'components/sidebar/index';
 import Input from 'components/input';
-
-import { BsCalendarDate, BsUnlock } from 'react-icons/bs';
-import { BiLockAlt } from 'react-icons/bi';
 import Button from 'components/button';
-import { HiOutlineIdentification } from 'react-icons/hi';
+import ParagraphWithIcon from 'components/paragraphWithIcon/index';
 
+import { AccountContainer } from './styles';
+
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+import { BsCalendarDate } from 'react-icons/bs';
 import { BiUserCircle } from 'react-icons/bi';
 import { HiOutlineMail } from 'react-icons/hi';
-import { BsKey, BsPhone, BsArrowRightShort } from 'react-icons/bs';
-import ParagraphWithIcon from '../../components/paragraphWithIcon/index';
-import { Span } from '../../components/span/style';
+import { BsPhone } from 'react-icons/bs';
+
+import { Span } from 'components/span/style';
 
 import Carousel from 'react-bootstrap/Carousel';
+
 import { useState, useEffect } from 'react';
+
 import './style.css';
+
 import { UseAuth } from 'providers/auth';
-import { UseHome } from 'providers/home';
-import { UseAccount } from '../../providers/account/index';
+import { UseAccount } from 'providers/account/index';
+
 import jwt_decode from 'jwt-decode';
-import maskPhone from 'utils/maskPhone';
-import { zodResolver } from '@hookform/resolvers/zod';
-import updateUserSchema from '../../schemas/updateUser/index';
-import { IUpdateContact } from '../../interfaces/contacts/index';
 import { mask, unMask } from 'remask';
+
+import updateUserSchema from 'schemas/updateUser/index';
+import { IUpdateContact } from 'interfaces/contacts/index';
 
 interface ITokenPayload {
     customerId: string;
@@ -36,7 +39,6 @@ interface ITokenPayload {
 
 const AccountPage = () => {
     const { token } = UseAuth();
-    // const { currentContactId } = UseHome();
     const { accountData, listAccount, updateUser } = UseAccount();
 
     const tokenPayload: ITokenPayload = jwt_decode(token);
@@ -62,18 +64,14 @@ const AccountPage = () => {
     };
 
     const handleForm = (data: IUpdateContact) => {
-        console.log('data', data);
-
         const formateData = Object.fromEntries(
             Object.entries(data).filter(([o, v]) => v !== '')
         );
 
         if (formateData.phone) {
             formateData.phone = unMask(formateData.phone);
-            console.log('if', formateData.phone);
         }
 
-        console.log('formateData', formateData);
         updateUser(token, formateData, tokenPayload.customerId);
     };
 
@@ -154,42 +152,9 @@ const AccountPage = () => {
                         </form>
                     </AccountContainer>
                 </Carousel.Item>
-                <Carousel.Item>
-                    <AccountContainer>
-                        <h3>Apagar conta </h3>
-
-                        <p>Essa ação não poderá ser desfeita</p>
-                    </AccountContainer>
-                </Carousel.Item>
             </Carousel>
         </>
     );
 };
 
 export default AccountPage;
-
-//
-//     /* <form>
-//     <Input
-//         Icon={BsUnlock}
-//         register={register}
-//         name="password"
-//         placeholder="Insira sua senha atual"
-//         type="password"
-//     />
-
-//     <Input
-//         Icon={BiLockAlt}
-//         register={register}
-//         name="password"
-//         placeholder="Nova senha"
-//         type="password"
-// //     />
-
-// //     <Button content="Alterar" />
-// // </form> */
-// // }
-
-// <h3>Alterar dados</h3>
-
-//

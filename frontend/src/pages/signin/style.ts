@@ -16,16 +16,19 @@ const SignInContainer = styled.div`
 
     .clouds {
         position: fixed;
+
         top: 0;
         left: 0;
         width: 2000px;
         height: 2500px;
+
         translate: 0% -35%;
         animation: ${clouds} 25s infinite linear;
     }
 
     main {
         position: static;
+
         height: 100vh;
 
         .form {

@@ -1,7 +1,7 @@
 import { AiOutlineClose } from 'react-icons/ai';
-import { ContainerModal } from './style';
-
 import { Dispatch, ReactNode, SetStateAction } from 'react';
+
+import { ContainerModal } from './style';
 
 interface ModalProps {
     title: string;

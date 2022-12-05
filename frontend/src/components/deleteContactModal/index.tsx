@@ -1,11 +1,13 @@
 import { UseHome } from 'providers/home';
-import { UseAuth } from '../../providers/auth/index';
-import Modal from 'components/baseModal';
+import { UseAuth } from 'providers/auth/index';
+
 import { ContainerButton, StyledParagraph } from './style';
+import Modal from 'components/baseModal';
 
 const DeleteContactModal = () => {
     const { setShowDeleteContactModal, currentContactId, deleteContact } =
         UseHome();
+
     const { token } = UseAuth();
 
     const handleForm = () => {

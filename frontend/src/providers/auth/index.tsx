@@ -1,12 +1,15 @@
+import api from 'services/api';
+
 import { createContext, useContext, useEffect, useState } from 'react';
-import IPropChildren from '../../interfaces/childrenInterface';
+
+import IPropChildren from 'interfaces/childrenInterface';
 import {
     ICreateAccountRequest,
     ILoginRequest,
-} from '../../interfaces/sessions/index';
+} from 'interfaces/sessions/index';
+import IAuthProvider from 'interfaces/authProvider/index';
+
 import { toast } from 'react-toastify';
-import api from 'services/api';
-import IAuthProvider from '../../interfaces/authProvider/index';
 import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext<IAuthProvider>({} as IAuthProvider);

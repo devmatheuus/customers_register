@@ -1,18 +1,23 @@
-import { Sidebar } from '../../components/sidebar/index';
-import { UseHome } from '../../providers/home/index';
-import { UseAuth } from '../../providers/auth/index';
 import React, { useEffect } from 'react';
 
-import Table from 'react-bootstrap/Table';
-import './styles.css';
-import maskPhone from '../../utils/maskPhone';
-import AddUser from '../../components/addUser/index';
+import { Sidebar } from 'components/sidebar/index';
 import CreateContactModal from 'components/createContactModal';
 import DeleteContactModal from 'components/deleteContactModal';
 import UpdateContactModal from 'components/updateContactModal';
 
+import { UseHome } from 'providers/home/index';
+import { UseAuth } from 'providers/auth/index';
+import AddUser from 'components/addUser/index';
+
+import Table from 'react-bootstrap/Table';
+
+import './styles.css';
+
+import maskPhone from 'utils/maskPhone';
+
 const HomePage = () => {
     const { token } = UseAuth();
+
     const {
         listOwnerContacts,
         contacts,
@@ -26,7 +31,6 @@ const HomePage = () => {
 
     useEffect(() => {
         listOwnerContacts(token);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleContactId = (
@@ -35,8 +39,6 @@ const HomePage = () => {
         const contactId = event.currentTarget.parentElement!.parentElement!.id;
 
         setCurrentContactId(contactId);
-
-        return;
     };
 
     return (

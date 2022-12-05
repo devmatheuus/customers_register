@@ -1,5 +1,6 @@
 import { ButtonHTMLAttributes } from 'react';
 import { IconType } from 'react-icons/lib';
+
 import ButtonContainer from './style';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLInputElement> {
