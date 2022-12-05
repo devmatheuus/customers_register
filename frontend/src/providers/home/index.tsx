@@ -132,7 +132,9 @@ export const HomeProvider = ({ children }: IPropChildren) => {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
-        }).then((res) => setDefaultContactDatas(res.data));
+        }).then((res) => {
+            setDefaultContactDatas(res.data);
+        });
     };
 
     return (

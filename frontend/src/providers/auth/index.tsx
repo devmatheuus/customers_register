@@ -14,9 +14,9 @@ const AuthContext = createContext<IAuthProvider>({} as IAuthProvider);
 export const UseAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }: IPropChildren) => {
+    const [authenticated, setAuthenticated] = useState(false);
     const navigate = useNavigate();
 
-    const [authenticated, setAuthenticated] = useState(false);
     const [token, setToken] = useState(
         () => (localStorage.getItem('token') as string) || ''
     );
