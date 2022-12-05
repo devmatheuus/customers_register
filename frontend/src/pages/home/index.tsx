@@ -11,6 +11,7 @@ import { UseAuth } from 'providers/auth/index';
 
 import { useNavigate } from 'react-router-dom';
 import ContactTable from 'components/contactTable';
+import NoContacts from 'components/noContacts';
 
 const HomePage = () => {
     const { token, authenticated } = UseAuth();
@@ -22,10 +23,9 @@ const HomePage = () => {
 
     const {
         listOwnerContacts,
-
+        contacts,
         showCreateContactModal,
         showDeleteContactModal,
-        setCurrentContactId,
         showUpdateContactModal,
     } = UseHome();
 
@@ -39,7 +39,8 @@ const HomePage = () => {
             {showDeleteContactModal && <DeleteContactModal />}
             {showUpdateContactModal && <UpdateContactModal />}
             <Sidebar />
-            <ContactTable />
+
+            {contacts.length ? <ContactTable /> : <NoContacts />}
 
             <AddUser />
         </>
