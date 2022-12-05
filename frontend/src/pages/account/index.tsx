@@ -22,6 +22,9 @@ import { UseHome } from 'providers/home';
 import { UseAccount } from '../../providers/account/index';
 import jwt_decode from 'jwt-decode';
 import maskPhone from 'utils/maskPhone';
+import { zodResolver } from '@hookform/resolvers/zod';
+import updateUserSchema from '../../schemas/updateUser/index';
+import { IUpdateContact } from '../../interfaces/contacts/index';
 
 interface ITokenPayload {
     customerId: string;
@@ -33,7 +36,7 @@ interface ITokenPayload {
 const AccountPage = () => {
     const { token } = UseAuth();
     // const { currentContactId } = UseHome();
-    const { accountData, listAccount } = UseAccount();
+    const { accountData, listAccount, updateUser } = UseAccount();
 
     const tokenPayload: ITokenPayload = jwt_decode(token);
 
@@ -41,22 +44,35 @@ const AccountPage = () => {
         listAccount(token, tokenPayload.customerId);
     }, []);
 
-    console.log(accountData);
-
     const { fullname, email, phone, createdAt } = accountData;
 
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm({
-        // resolver: zodResolver(signinSchema),
+    } = useForm<IUpdateContact>({
+        resolver: zodResolver(updateUserSchema),
     });
 
     const [index, setIndex] = useState(0);
 
     const handleSelect = (selectedIndex: number, e: any) => {
         setIndex(selectedIndex);
+    };
+
+    const handleForm = (data: IUpdateContact) => {
+        const formateData = Object.fromEntries(
+            Object.entries(data).filter(([o, v]) => v !== '')
+        );
+        console.log(formateData.phone);
+
+        if (formateData.phone) {
+            formateData.phone = phone.replace(/[^0-9]/g, '');
+            console.log(formateData.phone);
+        }
+        console.log(data);
+
+        updateUser(token, formateData, tokenPayload.customerId);
     };
 
     return (
@@ -100,34 +116,34 @@ const AccountPage = () => {
                 <Carousel.Item>
                     <AccountContainer>
                         <h3>Alterar informações</h3>
-                        <form>
+                        <form onSubmit={handleSubmit(handleForm)}>
                             <Input
                                 register={register}
                                 Icon={BiUserCircle}
-                                placeholder={'fullname'}
+                                placeholder={fullname}
                                 name="fullname"
                                 type="text"
                             />
-                            {/* <Span>{errors.fullname?.message}</Span> */}
+                            <Span>{errors.fullname?.message}</Span>
 
                             <Input
                                 register={register}
                                 Icon={HiOutlineMail}
-                                placeholder={'email'}
+                                placeholder={email}
                                 name="email"
                                 type="text"
                             />
-                            {/* <Span>{errors.email?.message}</Span> */}
+                            <Span>{errors.email?.message}</Span>
 
                             <Input
                                 register={register}
                                 Icon={BsPhone}
-                                placeholder={''}
+                                placeholder={phone && maskPhone(phone)}
                                 name="phone"
                                 type="text"
                                 mask="(99) 99999-9999"
                             />
-                            {/* <Span>{errors.phone?.message}</Span> */}
+                            <Span>{errors.phone?.message}</Span>
 
                             <Button content="Atualizar" />
                         </form>

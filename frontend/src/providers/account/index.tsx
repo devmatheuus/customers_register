@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import api from 'services/api';
 import IPropChildren from '../../interfaces/childrenInterface';
-import { IListContacts } from '../../interfaces/contacts/index';
+import { IListContacts, IUpdateContact } from '../../interfaces/contacts/index';
 
 interface IListAccount {
     id: string;
@@ -18,6 +18,7 @@ interface IListAccount {
 interface IAccountProvider {
     accountData: IListAccount;
     listAccount: (token: string, id: string) => void;
+    updateUser: (token: string, data: IUpdateContact, id: string) => void;
 }
 
 const AccountContext = createContext<IAccountProvider>({} as IAccountProvider);
@@ -49,8 +50,31 @@ export const AccountProvider = ({ children }: IPropChildren) => {
             });
     };
 
+    const updateUser = (token: string, data: IUpdateContact, id: string) => {
+        toast.loading('Atualizando...');
+
+        api.patch(`/customers/${id}`, data, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+            .then((response) => {
+                toast.success('Dados atualizados com sucesso');
+            })
+            .catch(() => {
+                toast.error('Nome ou telefone já cadastrados');
+            })
+            .finally(() => {
+                setTimeout(() => {
+                    toast.dismiss();
+                }, 2500);
+            });
+    };
+
     return (
-        <AccountContext.Provider value={{ accountData, listAccount }}>
+        <AccountContext.Provider
+            value={{ accountData, listAccount, updateUser }}
+        >
             {children}
         </AccountContext.Provider>
     );
