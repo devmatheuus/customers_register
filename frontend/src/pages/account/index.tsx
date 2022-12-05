@@ -108,7 +108,9 @@ const AccountPage = () => {
                                 />
                                 <ParagraphWithIcon
                                     Icon={BsCalendarDate}
-                                    content={`Criado em: ${createdAt}`}
+                                    content={`Criado em: ${new Date(
+                                        createdAt
+                                    ).toLocaleString()}`}
                                 />
                             </div>
                         </div>

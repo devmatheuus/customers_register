@@ -24,8 +24,8 @@ export const AccountContainer = styled.div`
         gap: 25px;
 
         display: flex;
-        justify-content: center;
         flex-direction: column;
+        justify-content: center;
         align-items: center;
 
         > div {
