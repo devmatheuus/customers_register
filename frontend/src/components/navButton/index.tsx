@@ -7,16 +7,9 @@ interface ButtonProps {
     name: string;
     icon?: IconType;
     isActive: boolean;
-    hasSubNav?: boolean;
 }
 
-const NavButton = ({
-    onClick,
-    name,
-    icon,
-    isActive,
-    hasSubNav,
-}: ButtonProps) => (
+const NavButton = ({ onClick, name, icon, isActive }: ButtonProps) => (
     <button
         type="button"
         onClick={() => onClick(name)}
