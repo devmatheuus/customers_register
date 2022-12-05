@@ -51,6 +51,10 @@ export const AccountProvider = ({ children }: IPropChildren) => {
     };
 
     const updateUser = (token: string, data: IUpdateContact, id: string) => {
+        console.log('Provider');
+        console.log(data);
+        console.log('Provider');
+
         toast.loading('Atualizando...');
 
         api.patch(`/customers/${id}`, data, {

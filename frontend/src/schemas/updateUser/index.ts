@@ -41,6 +41,8 @@ const updateUserSchema = z.object({
                 }
 
                 phone = phone.replace(/[^0-9]/g, '');
+                console.log('oi');
+                console.log(phone);
 
                 return phone.length === 11 ? true : false;
             } else {

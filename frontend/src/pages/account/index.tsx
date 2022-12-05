@@ -25,6 +25,7 @@ import maskPhone from 'utils/maskPhone';
 import { zodResolver } from '@hookform/resolvers/zod';
 import updateUserSchema from '../../schemas/updateUser/index';
 import { IUpdateContact } from '../../interfaces/contacts/index';
+import { mask, unMask } from 'remask';
 
 interface ITokenPayload {
     customerId: string;
@@ -61,17 +62,18 @@ const AccountPage = () => {
     };
 
     const handleForm = (data: IUpdateContact) => {
+        console.log('data', data);
+
         const formateData = Object.fromEntries(
             Object.entries(data).filter(([o, v]) => v !== '')
         );
-        console.log(formateData.phone);
 
         if (formateData.phone) {
-            formateData.phone = phone.replace(/[^0-9]/g, '');
-            console.log(formateData.phone);
+            formateData.phone = unMask(formateData.phone);
+            console.log('if', formateData.phone);
         }
-        console.log(data);
 
+        console.log('formateData', formateData);
         updateUser(token, formateData, tokenPayload.customerId);
     };
 
@@ -102,7 +104,8 @@ const AccountPage = () => {
                                 <ParagraphWithIcon
                                     Icon={BsPhone}
                                     content={`Telefone: ${
-                                        phone && maskPhone(phone)
+                                        phone &&
+                                        mask(phone, ['(99) 99999-9999'])
                                     }`}
                                 />
                                 <ParagraphWithIcon
@@ -138,7 +141,9 @@ const AccountPage = () => {
                             <Input
                                 register={register}
                                 Icon={BsPhone}
-                                placeholder={phone && maskPhone(phone)}
+                                placeholder={
+                                    phone && mask(phone, ['(99) 99999-9999'])
+                                }
                                 name="phone"
                                 type="text"
                                 mask="(99) 99999-9999"
