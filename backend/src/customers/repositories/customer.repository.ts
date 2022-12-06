@@ -4,7 +4,7 @@ import { CustomerEntity } from '../entities/customer.entity';
 import { CreateCustomerDto } from '../dto/create-customer.dto';
 import { UpdateCustomerDto } from '../dto/update-customer.dto';
 
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import { AuthService } from '../../auth/auth.service';
 import { SignInDto } from '../dto/sign-in.dto';
 import { BadRequestError } from '../../common/errors/types/BadRequestError';

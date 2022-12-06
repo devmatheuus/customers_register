@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+    frontend:
+        build: ./frontend
+        container_name: frontend
+        ports:
+            - '8081:80'
+
+    backend:
+        build: ./backend
+        entrypoint: .docker/entrypoint.sh
+        container_name: backend
+        ports:
+            - '3001:3001'
+        volumes:
+            - ./backend:/home/node/app
+        depends_on:
+            - db
+
+    db:
+        build: ./backend/.docker/postgres
+        container_name: db
+        restart: always
+        tty: true
+        ports:
+            - '5432:5432'
+        volumes:
+            - ./backend/.docker/dbdata:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_PASSWORD=matheus
+            - POSTGRES_DB=m6
