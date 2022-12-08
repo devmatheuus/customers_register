@@ -1,6 +1,6 @@
 import NavButton from 'components/navButton';
 import { useState } from 'react';
-import { AiOutlineFilePdf, AiOutlineHome } from 'react-icons/ai';
+import { AiOutlineHome } from 'react-icons/ai';
 import { WavyLink } from 'react-wavy-transitions';
 import { MdLockOutline } from 'react-icons/md';
 import { BiLogOut } from 'react-icons/bi';
@@ -28,14 +28,6 @@ export const Nav = () => {
                     name="Conta"
                     icon={MdLockOutline}
                     isActive={activeItem === 'Conta'}
-                />
-            </WavyLink>
-            <WavyLink to="/" color="#216ce7">
-                <NavButton
-                    onClick={handleClick}
-                    name="Gerar PDF"
-                    icon={AiOutlineFilePdf}
-                    isActive={activeItem === 'Gerar PDF'}
                 />
             </WavyLink>
             <WavyLink to="/" color="#216ce7">

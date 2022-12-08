@@ -6,7 +6,8 @@ import GlobalStyle from '../styles/global';
 import SignInPage from 'pages/signin';
 import SignUpPage from 'pages/signup';
 import HomePage from 'pages/home';
-import AccountPage from '../pages/account/index';
+import AccountPage from 'pages/account';
+import NotFound from 'pages/notFound';
 
 const RoutesTeste = () => (
     <>
@@ -20,6 +21,8 @@ const RoutesTeste = () => (
             <Route path="/home" element={<HomePage />} />
 
             <Route path="/account" element={<AccountPage />} />
+
+            <Route path="*" element={<NotFound />} />
         </Routes>
     </>
 );
