@@ -1,9 +1,8 @@
-
 # Instalação e Configurações
 
-_O projeto está configurado para ser executado através do docker, para começar você deve criar um arquivo .env na raíz da pasta backend. O arquivo .env deve conter as seguintes variávies:_
+_O projeto está configurado para ser executado através do docker, para começar você deve criar um arquivo .env na raiz da pasta backend. O arquivo .env deve conter as seguintes variáveis:_
 
-**_Obs: Mantenha as variáveis NODE_ENV, PORT e DATABASE_URL conforme o exemplo abaixo. Você pode alterar as variáveis JWT_SECRET, ENCTYPT_JWT e JWT_EXPIRATION se preferir._**
+**_Obs: Mantenha as variáveis NODE_ENV, PORT e DATABASE_URL conforme o exemplo abaixo. Você pode alterar as variáveis JWT_SECRET, ENCRYPT_JWT_SECRET e JWT_EXPIRATION se preferir._**
 
 ```
 //.env
@@ -29,25 +28,28 @@ _frontend_ -> 8081
 
 _db_ -> 5432
 
-
 ## Inicializando o projeto
-_Após concluir as configurações descritas acima, execute o seguinte comando a partir da pasta raíz do projeto_
+
+_Após concluir as configurações descritas acima, execute o seguinte comando a partir da pasta raiz do projeto_
+
 ```
 docker-compose up --build
 ```
 
-_Precisamos também executar as migrações do prisma, para que as tabelas e seus relacionamentos sejam gerados. Execute o seguinte a partir da pasta raíz do projeto para acessar o terminal do container backend:_
+_Precisamos também executar as migrações do prisma, para que as tabelas e seus relacionamentos sejam gerados. Execute o seguinte a partir da pasta raiz do projeto para acessar o terminal do container backend:_
+
 ```
 docker-compose exec backend bash
 ```
 
 _Logo em seguida, execute as migrações com o comando:_
+
 ```
 npx prisma migrate dev --name init
 ```
 
-
 _Após concluir as configurações citadas acima, a aplicação estará em execução na porta 8081:_
+
 ```
 localhost:8081
 ```
