@@ -30,13 +30,13 @@ _db_ -> 5432
 
 ## Inicializando o projeto
 
-_Após concluir as configurações descritas acima, execute o seguinte comando a partir da pasta raiz do projeto_
+_Após concluir as configurações descritas acima, execute o seguinte comando a partir da pasta raiz do projeto:_
 
 ```
 docker-compose up --build
 ```
 
-_Após levantar os containers você deve executar as migrações do prisma, para que as tabelas e seus relacionamentos sejam gerados. Execute o seguinte a partir da pasta raiz do projeto para acessar o terminal do container backend:_
+_Após levantar os containers você deve executar as migrações do prisma, para que as tabelas e seus relacionamentos sejam gerados. Execute o comando abaixo a partir da pasta raiz do projeto para acessar o terminal do container backend:_
 
 ```
 docker-compose exec backend bash
