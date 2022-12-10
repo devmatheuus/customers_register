@@ -1,7 +1,53 @@
-Após clonar o projeto, entre na pasta backend e execute o comando npm install, repita o processo para a pasta backend.
 
-Dentro da pasta backend, execute o comando npm run start para iniciar o projeto.
+# Instalação e Configurações
 
-Dentro da pasta frontend, execute o comando npm run start para iniciar o projeto.
+_O projeto está configurado para ser executado através do docker, para começar você deve criar um arquivo .env na raíz da pasta backend. O arquivo .env deve conter as seguintes variávies:_
 
-A pasta backend possui um workspace do insomnia pronto para que o projeto seja testado.
+**_Obs: Mantenha as variáveis NODE_ENV, PORT e DATABASE_URL conforme o exemplo abaixo. Você pode alterar as variáveis JWT_SECRET, ENCTYPT_JWT e JWT_EXPIRATION se preferir._**
+
+```
+//.env
+
+
+NODE_ENV=development
+PORT=3000
+DATABASE_URL="postgresql://postgres:matheus@db:5432/m6?schema=public"
+
+
+JWT_SECRET=!SKUJIK$MNO/
+ENCRYPT_JWT_SECRET=$UKMN*
+JWT_EXPIRATION=1d
+
+```
+
+**_Atenção_**:
+_O docker irá utilizar 3 portas locais para conseguir executar o projeto, certifique-se de não estar utilizando as portas abaixo_:
+
+_backend -> 3001_
+
+_frontend_ -> 8081
+
+_db_ -> 5432
+
+
+## Inicializando o projeto
+_Após concluir as configurações descritas acima, execute o seguinte comando a partir da pasta raíz do projeto_
+```
+docker-compose up --build
+```
+
+_Precisamos também executar as migrações do prisma, para que as tabelas e seus relacionamentos sejam gerados. Execute o seguinte a partir da pasta raíz do projeto para acessar o terminal do container backend:_
+```
+docker-compose exec backend bash
+```
+
+_Logo em seguida, execute as migrações com o comando:_
+```
+npx prisma migrate dev --name init
+```
+
+
+_Após concluir as configurações citadas acima, a aplicação estará em execução na porta 8081:_
+```
+localhost:8081
+```
