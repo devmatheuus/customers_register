@@ -30,6 +30,12 @@ _db_ -> 5432
 
 ## Inicializando o projeto
 
+Execute o comando abaixo a partir da pasta backend para conceder permissão para o arquivo .sh:
+
+```
+ chmod +x .docker/entrypoint.sh
+```
+
 _Após concluir as configurações descritas acima, execute o seguinte comando a partir da pasta raiz do projeto:_
 
 ```
